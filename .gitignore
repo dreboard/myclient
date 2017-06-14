@@ -1,0 +1,8 @@
+node_modules/
+.vagrant/
+.idea/
+/docs/
+/tests/
+/phpunit.xml
+/vendor
+

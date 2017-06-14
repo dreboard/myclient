@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        $(function(){
+            var jqxhr = $.get( "http://localhost/myapi/public/v1/users/all", function() {
+
+            })
+                .done(function(data) {
+
+                    $.each(data, function(key, val) {
+                        data.push( "<li id='" + val.first + "'>" + val.last + "</li>" );
+                    });
+                    $( "<ul/>", {
+                        "class": "my-new-list",
+                        html: data.join( "" )
+                    }).appendTo( "body" );
+                })
+                .fail(function() {
+                    alert( "error" );
+                })
+                .always(function() {
+                    //alert( "finished" );
+                });
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
