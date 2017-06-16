@@ -1,8 +1,8 @@
 node_modules/
 .vagrant/
 .idea/
-/docs/
-/tests/
+/docs
+/tests
 /phpunit.xml
 /vendor
-
+*.phar
