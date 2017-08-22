@@ -6,19 +6,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script>
+	    $(function(){
+	    	try{
+			    var url = "http://api.dev-php.site/v1/users/all";
+			    var versionUrl = "http://api.dev-php.site/v1/";
+			    $.get( versionUrl, function( data ) {
+				    $( "#results" )
+					    .append( "Version: " + data.version + "<br />" )
+					    .append( "Environment: " + data.environment );
+			    }, "json" );
+            } catch (err){
+	    		console.log(err.message);
+            }
+
+	    });
+
+
         $(function(){
-            var jqxhr = $.get( "http://localhost/myapi/public/v1/users/all", function() {
+            var jqxhr = $.get( "http://api.dev-php.site/v1/", function() {
 
             })
                 .done(function(data) {
+                    console.log(data);
 
-                    $.each(data, function(key, val) {
-                        data.push( "<li id='" + val.first + "'>" + val.last + "</li>" );
-                    });
-                    $( "<ul/>", {
-                        "class": "my-new-list",
-                        html: data.join( "" )
-                    }).appendTo( "body" );
                 })
                 .fail(function() {
                     alert( "error" );
@@ -30,10 +40,9 @@
 
         });
 
-
     </script>
 </head>
 <body>
-
+<div id="results"></div>
 </body>
 </html>
