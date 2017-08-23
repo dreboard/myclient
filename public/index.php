@@ -22,6 +22,7 @@ require_once '../config/init.php';
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	        crossorigin="anonymous"></script>
+	<script>var ENVIRONMENT = 'production';</script>
 	<script src="js/ajaxEvents.js?v=<?= time(); ?>"></script>
 	<script src="js/scripts.js?v=<?= time(); ?>"></script>
 	<script>
@@ -99,7 +100,6 @@ require_once '../config/init.php';
 				officiis rerum.</p>
 			<a id="ajax_btn" class="btn btn-primary" href="#">Ajax Button <span
 						class="glyphicon glyphicon-chevron-right"></span></a>
-			<?= $_SERVER['SERVER_NAME']; ?>
 			<hr>
 
 
@@ -112,9 +112,9 @@ require_once '../config/init.php';
 			<div class="well">
 				<h4>Blog Search</h4>
 				<div class="input-group">
-					<input type="text" class="form-control">
+					<input name="post_var" value="" id="post_var" type="text" class="form-control">
 					<span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
+                            <button id="post_btn" class="btn btn-default" type="button">
                                 <span class="glyphicon glyphicon-search"></span>
                         </button>
                         </span>
@@ -124,32 +124,10 @@ require_once '../config/init.php';
 
 			<!-- Blog Categories Well -->
 			<div class="well">
-				<h4>Blog Categories</h4>
+				<h4>Post Response</h4>
 				<div class="row">
-					<div class="col-lg-6">
-						<ul class="list-unstyled">
-							<li><a href="#">Category Name</a>
-							</li>
-							<li><a href="#">Category Name</a>
-							</li>
-							<li><a href="#">Category Name</a>
-							</li>
-							<li><a href="#">Category Name</a>
-							</li>
-						</ul>
-					</div>
-					<!-- /.col-lg-6 -->
-					<div class="col-lg-6">
-						<ul class="list-unstyled">
-							<li><a href="#">Category Name</a>
-							</li>
-							<li><a href="#">Category Name</a>
-							</li>
-							<li><a href="#">Category Name</a>
-							</li>
-							<li><a href="#">Category Name</a>
-							</li>
-						</ul>
+					<div class="col-lg-12">
+						<p id="post_response"></p>
 					</div>
 					<!-- /.col-lg-6 -->
 				</div>

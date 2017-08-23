@@ -1,6 +1,6 @@
 /**
  * AJAX Events
- *
+ * http://localhost/api/myclient/public/
  * Encapsulated object to perform ajax api calls
  */
 $(document).ready(function () {
@@ -31,8 +31,18 @@ $(document).ready(function () {
 		 */
 		dom: function () {
 			this.$contentbox = $('.page_body');
-			this.$buttons = $('#ajax_btn');
-			this.$otherBtns = this.$contentbox.find('.otherBtns');
+			this.$ajax_btn = $('#ajax_btn');
+			this.$post_btn = $('#post_btn');
+			this.$otherBtns = this.$contentbox.find('#ajax_btn');
+		},
+
+		/**
+		 * Register a post event
+		 *
+		 * @return void
+		 */
+		postEvent: function () {
+			this.$post_btn.on('click', this.postAjax);
 		},
 
 		/**
@@ -41,8 +51,9 @@ $(document).ready(function () {
 		 * @return void
 		 */
 		events: function () {
-			this.$buttons.on('click', this.fireAjax);
+			this.$ajax_btn.on('click', this.fireAjax);
 		},
+
 		doDiv: function (event) {
 			event.preventDefault();
 			alert('hello');
@@ -55,6 +66,7 @@ $(document).ready(function () {
 		 * @return object
 		 */
 		fireAjax: function (event) {
+			event.preventDefault();
 			try {
 				$('#results').empty();
 				var some_post_vars = {
@@ -65,7 +77,7 @@ $(document).ready(function () {
 				$.ajax({
 					method: "GET",
 					data: some_post_vars,   // method #1
-					//data: { name: "Dre", location: "Board" }  // Method #2
+					//data: { name: "Dre", location: "Board" }  // Sample Method #2
 					url: "https://jsonplaceholder.typicode.com/posts/1"
 				})
 					.done(function (data) {
@@ -82,6 +94,40 @@ $(document).ready(function () {
 					})
 					.fail(function () {
 						$('#results').text('Ajax error');
+					});
+
+			} catch (err) {
+				console.log((err.message));
+			}
+		},
+		/**
+		 * Fire and ajax GET request
+		 *
+		 * @return object
+		 */
+		postAjax: function (event) {
+			event.preventDefault();
+			console.log($("#post_var").val());
+			try {
+				$('#results').empty();
+
+				var post_var = $("#post_var").val();
+				var params = { post_var: post_var };
+				$.ajax({
+					method: "POST",
+					data: post_var,   // method #1
+					url: "http://localhost/api/myclient/public/form.php",
+					dataType: "json",
+					contentType: "application/json"
+				})
+					.done(function (data) {
+
+						console.log(data);  // for testing only
+
+						$('#post_response').text(data);
+					})
+					.fail(function () {
+						$('#post_response').text('Ajax error');
 					});
 
 			} catch (err) {
